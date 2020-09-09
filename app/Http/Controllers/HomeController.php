@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +39,7 @@ class HomeController extends Controller
             'password'          => 'required|min:8|confirmed|string',
             'chember_address' 	=> 'required',
             'natnal_id' 		=> 'required',
-            'lawyer_type'         => 'lawyer_type',
+            'lawyer_type'       => 'required',
         ]);
 
     	$user = New User;
@@ -52,6 +53,7 @@ class HomeController extends Controller
     	$user->natnal_id = $request->natnal_id;
     	$user->save();
         auth()->login($user, true);
+        Toastr::success('Register Successfully','Success');
         return redirect()->route('lawyer.dashboard');
         
     }
@@ -74,5 +76,11 @@ class HomeController extends Controller
     public function client_dashboard()
     {
         return view('client.dashboard');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('profile',compact('user'));
     }
 }

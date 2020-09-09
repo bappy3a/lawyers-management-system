@@ -1,6 +1,9 @@
-<li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
-	<a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+<li class="{{ Request::is('lawyer/dashboard') ? 'active' : '' }}">
+	<a href="{{ route('lawyer.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
 </li>
-<li class="{{ Request::is('admin/lawyer*') ? 'active' : '' }}">
-	<a href="{{ route('admin.lawyer') }}"><i class="fa fa-user-secret"></i> Lawyers</a>
+<li class="{{ Request::is('lawyer/post*') ? 'active' : '' }}">
+	<a href="{{ route('lawyer.post') }}"><i class="fa fa-bank"></i> Job Post For Law</a>
+</li>
+<li class="{{ Request::is('message*') ? 'active' : '' }}">
+	<a href="{{ route('message.index') }}"><i class="fa fa-envelope-o"></i>Message</a>
 </li>

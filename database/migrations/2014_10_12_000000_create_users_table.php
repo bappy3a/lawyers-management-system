@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('status')->default('active');
             $table->date('last_login')->nullable();
             $table->integer('review')->default(0);
+            $table->double('rat')->default(0,00);
             $table->string('lawyer_type')->nullable();
             $table->integer('is_verified')->nullable();
             $table->rememberToken();

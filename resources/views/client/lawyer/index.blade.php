@@ -6,6 +6,77 @@
       <div class="row">
         <div class="col-xs-12">
 
+
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Search Lowyer</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <form action="{{ url()->current() }}" method="GET" autocomplete="off">
+            <input type="hidden" name="s" value="on">
+            <div class="row">
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label>Lowyer Type</label>
+                  <select class="form-control" name="lawyer_type">
+                    <option value=""> Select Lowyer Type</option>
+              
+                    @if(request()->query('lawyer_type'))
+                      <option selected value="{{ request()->query('lawyer_type') }}">{{ request()->query('lawyer_type') }}</option>
+                    @endif
+                    <option value="Personal Injury">Personal Injury</option>
+                    <option value="Estate Planning">Estate Planning</option>
+                    <option value="Bankruptcy">Bankruptcy</option>
+                    <option value="Intellectual Property">Intellectual Property</option>
+                    <option value="Employment">Employment</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Immigration">Immigration</option>
+                    <option value="Criminal">Criminal</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label>Reting</label>
+                  <select class="form-control" name="review">
+                    <option value="">Select Reting</option>
+                    @if(request()->query('review'))
+                      <option selected value="{{ request()->query('review') }}">Star {{ request()->query('review') }}</option>
+                    @endif
+                    <option value="0">Star 0</option>
+                    <option value="1">Star 1</option>
+                    <option value="2">Star 2</option>
+                    <option value="3">Star 3</option>
+                    <option value="4">Star 4</option>
+                    <option value="5">Star 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label>Verified</label>
+                  <select class="form-control" name="is_verified">
+                    <option value="">Select Verified Status</option>
+                    <option @if(request()->query('review')) selected @endif value="1">Yes</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <label style="margin-bottom: 20px;"> </label>
+                <button type="submit" class="btn btn-block btn-success"> Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">All Lawyer List</h3>

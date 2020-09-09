@@ -7,11 +7,15 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bower_components/moment/min/moment.min.js') }}">
   <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <link href="{{ asset('css/sweetalert2.css') }}" rel="stylesheet" type="text/css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
   <style>
     i.fa.fa-star.active {
@@ -19,6 +23,13 @@
     }
         i.fa.fa-star-o {
         color: #ffbc00;
+    }
+    .invalid-feedback{
+      color: red !important;
+      font-size: 11px;
+    }
+    .display-none{
+      display: none !important;
     }
   </style>
   @yield('css')
@@ -33,7 +44,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ route('/') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -59,13 +70,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+              <img src="{{ asset(Auth::user()->image) }}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image">
                 <p>{{ Auth::user()->name }} </p>
               </li>
               <!-- Menu Footer-->
@@ -95,7 +106,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ auth()->user()->name }}</p>
@@ -150,6 +161,16 @@
 
   <div class="control-sidebar-bg"></div>
 
+  <div class="modal modal-default fade" id="lawyerMessage">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" id="messageBody">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <!-- ./wrapper -->
 
@@ -159,13 +180,33 @@
 <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.all.js') }}"></script>
+<script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+<script src="{{ asset('dist/js/toastr.min.js') }}"></script>
 @yield('js')
+<script>
+  $(function () {
+    CKEDITOR.replace('edtor')
+  })
+
+  function userMessage(id){
+    $('#messageBody').html(null);
+    $('#lawyerMessage').modal();
+    $.post('{{ route('message.user') }}', {_token:'{{ csrf_token() }}', id:id}, function(data){
+        $('#messageBody').html(data);
+    });
+  }
+
+
+</script>
+{!! Toastr::message() !!}
 </body>
 </html>
