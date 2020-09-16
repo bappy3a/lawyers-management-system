@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCasTable extends Migration
+class CreateHaresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateCasTable extends Migration
      */
     public function up()
     {
-        Schema::create('cas', function (Blueprint $table) {
+        Schema::create('hares', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('case_no');
-            $table->string('case_title');
-            $table->date('case_date');
-            $table->text('case_description');
+            $table->integer('client_id');
+            $table->integer('lowyer_id');
+            $table->integer('case_id');
+            $table->date('hire_date');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateCasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cas');
+        Schema::dropIfExists('hares');
     }
 }

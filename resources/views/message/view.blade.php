@@ -23,11 +23,12 @@
         <div class="col-md-9">
           <div class="box box-primary direct-chat direct-chat-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Direct Chat</h3>
+              <h3 class="box-title">Message Bood</h3>
 
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
+                @if(Auth::user()->role == 'client')
+                  <a href="{{ route('client.lawyer.view',$messages->first()->to) }}" class="btn btn-primary btn-sm">View LawYer Profile</a>
+                @endif
               </div>
             </div>
             <!-- /.box-header -->

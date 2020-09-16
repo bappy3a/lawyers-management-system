@@ -24,7 +24,7 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Hare Rate</b> <a class="pull-right">BDT {{ $lawyer->rat }}</a>
+                  <b>Hire Rate</b> <a class="pull-right">BDT {{ $lawyer->rat }}</a>
                 </li>
                 <li class="list-group-item">
                   <b>Reting</b> <a class="pull-right">{{ renderStarRating($lawyer->review) }}</a>
@@ -34,7 +34,7 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Hare This Lowyer</b></a>
+              <button type="button" data-toggle="modal" data-target="#HireLowyer" class="btn btn-primary btn-block"><b>Hire This Lowyer</b></button>
             </div>
             <!-- /.box-body -->
           </div>
@@ -112,7 +112,7 @@
                           <a href="#">Jonathan Burke Jr.</a>
                           <a class="pull-right btn-box-tool">{{ renderStarRating(4) }}</a>
                         </span>
-                    <span class="description">Shared publicly - 7:30 PM today</span>
+                    <span class="description">SHired publicly - 7:30 PM today</span>
                   </div>
                   <p>
                     Lorem ipsum represents a long-held tradition for designers,
@@ -156,6 +156,49 @@
         </div>
         <!-- /.col -->
       </div>
+
+
+
+  <div class="modal fade" id="HireLowyer">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Hire <u>{{ $lawyer->name }}</u></h4>
+        </div>
+        <div class="modal-body">
+            <form role="form" action="{{ route('hire.payment') }}" method="POST">
+              @csrf
+              <input type="hidden" name="lawyer_id" value="{{ $lawyer->id }}">
+              <div class="box-body">
+                <div class="form-group">
+                  <label>Select Case</label>
+                  <select name="case_id" class="form-control" required>
+                      <option value="" selected>--- Select case ---</option>
+                    @foreach(\App\Cas::where('user_id',auth()->user()->id)->get() as $case)
+                      <option value="{{ $case->id }}">{{ $case->case_title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" required> Hire this lowyer play <b class="text-red">BDT {{ $lawyer->rat }}</b>
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Hire</button>
+              </div>
+            </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 
 @endsection
 

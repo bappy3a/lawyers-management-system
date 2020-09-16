@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@login')->name('/');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/paymnet/pricing', 'HomeController@paymnet_pricing')->name('paymnet.pricing');
+Route::post('/paymnet/okay', 'HomeController@paymnet_okay');
 Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/lawer/register', 'HomeController@lawer_register')->name('lawer.register');
 Route::post('/lawer/register', 'HomeController@lawer_register_save')->name('lawer.register');
@@ -33,11 +35,13 @@ Route::group(['prefix' =>'client','middleware'=>['auth']], function(){
 	Route::resource('case','CasController');
 });
 
-
+Route::resource('hire','HareController');
 Route::group(['middleware'=>['auth']], function(){
 	Route::resource('message','MessageController');
 	Route::post('message/user','MessageController@user')->name('message.user');
 	Route::post('message/send','MessageController@send')->name('message.send');
 	Route::get('message/details/{id}','MessageController@details')->name('message.details');
+	
+	Route::post('hire/payment','HareController@harepayment')->name('hire.payment');
 });
 

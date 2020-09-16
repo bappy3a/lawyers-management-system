@@ -6,6 +6,7 @@ use App\Cas;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CasController extends Controller
 {
@@ -46,6 +47,7 @@ class CasController extends Controller
         ]);
 
         $case = New Cas;
+        $case->user_id = Auth::user()->id;
         $case->case_no = $request->case_no;
         $case->case_title = $request->case_title;
         $case->case_date = Carbon::createFromFormat('m/d/Y', $request->case_date)->format('Y-m-d');

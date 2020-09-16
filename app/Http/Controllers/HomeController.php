@@ -83,4 +83,17 @@ class HomeController extends Controller
         $user = Auth::user();
         return view('profile',compact('user'));
     }
+
+    public function paymnet_pricing(Request $request)
+    {
+        $user = User::find($request->value_c);
+        auth()->login($user, true);
+        return view('paymnetfail');
+    }
+
+    public function paymnet_okay(Request $request)
+    {
+        
+        return view('paymnet');
+    }
 }
