@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path(),
         ],
 
         'public' => [
@@ -65,21 +65,6 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Symbolic Links
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
-    |
-    */
-
-    'links' => [
-        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

@@ -6,7 +6,7 @@ Route::get('/', 'HomeController@login')->name('/');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/paymnet/pricing', 'HomeController@paymnet_pricing')->name('paymnet.pricing');
 Route::post('/paymnet/okay', 'HomeController@paymnet_okay');
-Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::post('/user/profile/update', 'HomeController@profile_update')->name('profile.update');
 Route::get('/lawer/register', 'HomeController@lawer_register')->name('lawer.register');
 Route::post('/lawer/register', 'HomeController@lawer_register_save')->name('lawer.register');
 Auth::routes();
@@ -41,7 +41,7 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::post('message/user','MessageController@user')->name('message.user');
 	Route::post('message/send','MessageController@send')->name('message.send');
 	Route::get('message/details/{id}','MessageController@details')->name('message.details');
-	
+	Route::get('/profile', 'HomeController@profile')->name('profile');
 	Route::post('hire/payment','HareController@harepayment')->name('hire.payment');
 });
 

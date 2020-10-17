@@ -96,4 +96,37 @@ class HomeController extends Controller
         
         return view('paymnet');
     }
+
+    public function profile_update(Request $request)
+    {
+
+        if ($request->password != null) {
+            $this->validate($request,[
+                'password' => 'required|confirmed',
+            ]);
+        }
+        
+
+       $user = User::find(Auth::user()->id);
+       $user->name = $request->name;
+       $user->number = $request->number;
+       $user->reg_no = $request->reg_no;
+       $user->natnal_id = $request->natnal_id;
+       $user->dob = $request->dob;
+       $user->experience = $request->experience;
+       $user->chember_address = $request->chember_address;
+       $user->address = $request->address;
+       $user->rat = $request->rat;
+       if ($request->hasFile('image')) {
+           $user->image = $request->image->store('uploads/user');
+       }
+
+       if($request->password != null){
+            $user->password = Hash::make($request->password);
+        }
+
+       $user->save();
+       Toastr::success('Profile Successfully Update','Success');
+       return back();
+    }
 }
