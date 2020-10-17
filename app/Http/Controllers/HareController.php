@@ -17,7 +17,8 @@ class HareController extends Controller
      */
     public function index()
     {
-        //
+        $hires = Hare::where('client_id',Auth::user()->id)->get();
+        return view('client.hire.index',compact('hires'));
     }
 
     /**
