@@ -21,27 +21,28 @@
 	                <li class="list-group-item">
 	                  <b>Verification Status</b> <a class="pull-right">
         						@if($user->is_verified)
-        		                  <i data-toggle="tooltip" data-placement="top" title="Verified" style="color: #3c763d" class="fa fa-check"></i>
-        		                @else
-        		                  <i data-toggle="tooltip" data-placement="top" title="Not Verified" style="color: red" class="fa fa-close"></i>
-        		                @endif
+      		                  <i data-toggle="tooltip" data-placement="top" title="Verified" style="color: #3c763d" class="fa fa-check"></i>
+      		                @else
+      		                  <i data-toggle="tooltip" data-placement="top" title="Not Verified" style="color: red" class="fa fa-close"></i>
+      		                @endif
 
-        	                  </a>
-        	                </li>
-        	            @endif
-	            @if($user->role == 'lawyer')
-	                <li class="list-group-item">
-	                  <b>Hire Rate</b> <a class="pull-right">BDT {{ $user->rat }}</a>
-	                </li>
-	            @endif
-	            @if($user->role == 'lawyer')
-	                <li class="list-group-item">
-	                  <b>Reating</b> <a class="pull-right">{{ renderStarRating($user->review) }}</a>
-	                </li>
-	            @endif
+      	                  </a>
+      	                </li>
+      	            @endif
+    	            @if($user->role == 'lawyer')
+    	                <li class="list-group-item">
+    	                  <b>Hire Rate</b> <a class="pull-right">BDT {{ $user->rat }}</a>
+    	                </li>
+    	            @endif
+    	            @if($user->role == 'lawyer')
+    	                <li class="list-group-item">
+    	                  <b>Reating</b> <a class="pull-right">{{ renderStarRating($user->review) }}</a>
+    	                </li>
+    	            @endif
               </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              @if(!$user->is_verified)
+                <button data-toggle="modal" data-target="#accoutn-acctive" type="button" class="btn btn-danger btn-block"><b>Active Your Profile</b></button>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>
@@ -232,4 +233,37 @@
         </div>
         <!-- /.col -->
       </div>
+
+
+
+<!-- Model  -->
+<div class="modal fade" id="accoutn-acctive">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Account Verified From</h4>
+      </div>
+      <div class="modal-body">
+        <p>আপনার acoutn টিই verifide কর্তে ৫০০ টাকা দিতে হবে</p>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 @endsection
