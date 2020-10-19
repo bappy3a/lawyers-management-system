@@ -110,7 +110,7 @@ class HomeController extends Controller
        $user = User::find(Auth::user()->id);
        $user->name = $request->name;
        $user->number = $request->number;
-       $user->reg_no = $request->reg_no;
+       $user->certificate = $request->certificate;
        $user->natnal_id = $request->natnal_id;
        $user->dob = $request->dob;
        $user->experience = $request->experience;

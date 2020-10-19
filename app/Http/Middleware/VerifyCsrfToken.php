@@ -14,5 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/hire',
         '/paymnet/pricing',
+        '/verification/pay/success',
+        '/verification/pay/fail',
     ];
 }

@@ -9,6 +9,10 @@ Route::post('/paymnet/okay', 'HomeController@paymnet_okay');
 Route::post('/user/profile/update', 'HomeController@profile_update')->name('profile.update');
 Route::get('/lawer/register', 'HomeController@lawer_register')->name('lawer.register');
 Route::post('/lawer/register', 'HomeController@lawer_register_save')->name('lawer.register');
+Route::resource('hire','HareController');
+Route::any('verification/pay/success','VerificationController@success_pay')->name('verification.pay.success');
+Route::any('verification/pay/fail','VerificationController@fail_pay')->name('verification.pay.fail');
+
 Auth::routes();
 
 // Admin Route
@@ -35,7 +39,6 @@ Route::group(['prefix' =>'client','middleware'=>['auth']], function(){
 	Route::resource('case','CasController');
 });
 
-Route::resource('hire','HareController');
 Route::group(['middleware'=>['auth']], function(){
 	Route::resource('message','MessageController');
 	Route::post('message/user','MessageController@user')->name('message.user');
@@ -43,5 +46,6 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::get('message/details/{id}','MessageController@details')->name('message.details');
 	Route::get('/profile', 'HomeController@profile')->name('profile');
 	Route::post('hire/payment','HareController@harepayment')->name('hire.payment');
+	Route::resource('verification','VerificationController');
+	Route::any('verification/pay','VerificationController@verification_pay')->name('verification_pay');
 });
-

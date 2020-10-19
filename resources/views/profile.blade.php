@@ -138,10 +138,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Lawyer Registration Number</label>
+                    <label for="inputExperience" class="col-sm-2 control-label">Lawyer education institution name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" name="reg_no" placeholder="Lawyer Registration Number" class="form-control" value="{{ $user->reg_no }}">
+                      <input type="text" name="certificate" placeholder="Lawyer education institution name" class="form-control" value="{{ $user->certificate_2 }}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -240,26 +240,43 @@
 <div class="modal fade" id="accoutn-acctive">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Account Verified From</h4>
-      </div>
-      <div class="modal-body">
-        <p>আপনার acoutn টিই verifide কর্তে ৫০০ টাকা দিতে হবে</p>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      @php
+        $verification = App\Verification::where('user_id',$user->id)->first();
+      @endphp
+      <form action="{{ route('verification.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Account Verified From</h4> <span class="text-red">Verification free 500 Bdt</span>
         </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        <div class="modal-body">
+          @if($verification)
+            <h3>Your request is {{ $verification->status }} please wait for chack your certificate</h3>
+          @else
+            <div class="form-group">
+              <label>Bar council registration number</label>
+              <input type="text" name="reg_no" class="form-control" placeholder="Bar council registration number">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Inpurt Your all certificate</label>
+                <input type="file" name="certificate_2[]" multiple>
+                <p class="help-block">Multiple upload.</p>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" required> Pay BDT 500 For Verified
+              </label>
+            </div>
+          @endif
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          @if(!$verification)
+            <button type="submit" class="btn btn-primary">Submit</button>
+          @endif
+        </div>
+      </form>
     </div>
   </div>
 </div>
