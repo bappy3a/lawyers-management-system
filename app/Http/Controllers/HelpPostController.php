@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Cas;
-use App\Post;
+use App\HelpPost;
+use App\PostComment;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class HelpPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id',Auth::user()->id)->latest()->get();
-        return view('client.post.index',compact('posts'));
+        $posts = HelpPost::latest()->get();
+        return view('help_post.index',compact('posts'));
     }
 
     /**
@@ -28,8 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $cases = Cas::get();
-        return view('client.post.create',compact('cases'));
+        return view('help_post.create');
     }
 
     /**
@@ -44,70 +43,79 @@ class PostController extends Controller
             'title'           => 'required',
             'description'         => 'required',
         ]);
-        $post = New Post;
+        $post = New HelpPost;
         $post->title = $request->title;
         $post->user_id = Auth::user()->id;
         $post->description = $request->description;
         $post->save();
         Toastr::success('Post Successfully Save','Success');
-        return redirect()->route('post.index');
+        return redirect()->route('helppost.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\HelpPost  $helpPost
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $post  = Post::find($id);
-        return view('client.post.view',compact('post'));
+        $post  = HelpPost::find($id);
+        return view('help_post.view',compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\HelpPost  $helpPost
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $cases = Cas::get();
-        $post  = Post::find($id);
-        return view('client.post.edit',compact('cases','post'));
+        $post  = HelpPost::find($id);
+        return view('help_post.edit',compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\HelpPost  $helpPost
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
     {
         $this->validate($request,[
             'title'           => 'required',
-            'case_id'        => 'required',
-            'description'    => 'required',
+            'description'         => 'required',
         ]);
-        $post = Post::find($id);
+        $post = HelpPost::find($id);
         $post->title = $request->title;
         $post->description = $request->description;
         $post->save();
-        Toastr::success('Post Successfully update','Success');
-        return redirect()->route('post.index');
+        Toastr::success('Post Successfully Update','Success');
+        return redirect()->route('helppost.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\HelpPost  $helpPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(HelpPost $helpPost)
     {
-        dd($id);
+        //
+    }
+
+    public function comment(Request $request)
+    {
+        $comment = New PostComment;
+        $comment->user_id = auth()->user()->id;
+        $comment->help_post_id = $request->help_post_id;
+        $comment->comment = $request->comment;
+        $comment->save();
+        Toastr::success('Your Comment Successfully Save','Success');
+        return back();
     }
 }

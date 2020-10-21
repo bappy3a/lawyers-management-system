@@ -48,4 +48,6 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::post('hire/payment','HareController@harepayment')->name('hire.payment');
 	Route::resource('verification','VerificationController');
 	Route::any('verification/pay','VerificationController@verification_pay')->name('verification_pay');
+	Route::resource('helppost','HelpPostController');
+	Route::post('help/post/comment','HelpPostController@comment')->name('help.post.comment');
 });

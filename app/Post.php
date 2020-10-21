@@ -14,6 +14,6 @@ class Post extends Model
 	  	return $this->belongsTo(User::class,'user_id');
 	}
 	public function bit(){
-    return $this->hasMany(PostBit::class,'post_id');
-  }
+	    return $this->hasMany(PostBit::class,'post_id');
+	}
 }

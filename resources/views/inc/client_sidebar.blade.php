@@ -13,6 +13,9 @@
 <li class="{{ Request::is('hire*') ? 'active' : '' }}">
 	<a href="{{ route('hire.index') }}"><i class="fa fa-user-circle"></i>Hire Lowyer</a>
 </li>
+<li class="{{ Request::is('helppost*') ? 'active' : '' }}">
+	<a href="{{ route('helppost.index') }}"><i class="fa fa-briefcase"></i>Help Post</a>
+</li>
 <li class="{{ Request::is('message*') ? 'active' : '' }}">
 	<a href="{{ route('message.index') }}"><i class="fa fa-envelope-o"></i>Message</a>
 </li>
