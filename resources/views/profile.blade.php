@@ -4,9 +4,9 @@
 @section('content')
       <div class="row">
         <div class="col-md-3">
-			@php
-				$user = Auth::user();
-			@endphp
+  			@php
+  				$user = Auth::user();
+  			@endphp
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
@@ -40,8 +40,10 @@
     	                </li>
     	            @endif
               </ul>
-              @if(!$user->is_verified)
-                <button data-toggle="modal" data-target="#accoutn-acctive" type="button" class="btn btn-danger btn-block"><b>Active Your Profile</b></button>
+              @if($user->role == 'lawyer')
+                @if(!$user->is_verified)
+                  <button data-toggle="modal" data-target="#accoutn-acctive" type="button" class="btn btn-danger btn-block"><b>Active Your Profile</b></button>
+                @endif
               @endif
             </div>
             <!-- /.box-body -->
@@ -49,58 +51,60 @@
           <!-- /.box -->
 
           <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+          @if($user->role == 'lawyer')
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">About Me</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+                <p class="text-muted">
+                  {{ $user->certificate }}
+                </p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Home Location</strong>
+
+                <p class="text-muted">{{ $user->address }}</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Chember Location</strong>
+
+                <p class="text-muted">{{ $user->chember_address }}</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Barcouncil Id Number</strong>
+
+                <p class="text-muted">{{ $user->reg_no }}</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>NID Number</strong>
+
+                <p class="text-muted">{{ $user->natnal_id }}</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Date Of Barth</strong>
+
+                <p class="text-muted">{{ $user->dob }}</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Experience</strong>
+
+                <p>{{ $user->experience }}</p>
+
+                <hr>
+              </div>
+              <!-- /.box-body -->
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                {{ $user->certificate }}
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>Home Location</strong>
-
-              <p class="text-muted">{{ $user->address }}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>Chember Location</strong>
-
-              <p class="text-muted">{{ $user->chember_address }}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>Barcouncil Id Number</strong>
-
-              <p class="text-muted">{{ $user->reg_no }}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>NID Number</strong>
-
-              <p class="text-muted">{{ $user->natnal_id }}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>Date Of Barth</strong>
-
-              <p class="text-muted">{{ $user->dob }}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i>Experience</strong>
-
-              <p>{{ $user->experience }}</p>
-
-              <hr>
-            </div>
-            <!-- /.box-body -->
-          </div>
+          @endif
           <!-- /.box -->
         </div>
         <!-- /.col -->
@@ -137,13 +141,15 @@
                       <input type="text" name="number" class="form-control" id="inputName" placeholder="Phone Number" value="{{ $user->number }}">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Lawyer education institution name</label>
+                  @if($user->role == 'lawyer')
+                    <div class="form-group">
+                      <label for="inputExperience" class="col-sm-2 control-label">Lawyer education institution name</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" name="certificate" placeholder="Lawyer education institution name" class="form-control" value="{{ $user->certificate_2 }}">
+                      <div class="col-sm-10">
+                        <input type="text" name="certificate" placeholder="Lawyer education institution name" class="form-control" value="{{ $user->certificate_2 }}">
+                      </div>
                     </div>
-                  </div>
+                  @endif
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">NID Number</label>
 
@@ -158,20 +164,24 @@
                       <input type="date" name="dob" class="form-control" id="inputSkills" placeholder="Date Of Barth" value="{{ $user->dob }}">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Experience</label>
+                  @if($user->role == 'lawyer')
+                    <div class="form-group">
+                      <label for="inputSkills" class="col-sm-2 control-label">Experience</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" name="experience" class="form-control" id="inputSkills" placeholder="Experience" value="{{ $user->experience }}">
+                      <div class="col-sm-10">
+                        <input type="text" name="experience" class="form-control" id="inputSkills" placeholder="Experience" value="{{ $user->experience }}">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Chember Address</label>
+                  @endif
+                  @if($user->role == 'lawyer')
+                    <div class="form-group">
+                      <label for="inputSkills" class="col-sm-2 control-label">Chember Address</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" name="chember_address" class="form-control" id="inputSkills" placeholder="Chember Address" value="{{ $user->chember_address }}">
+                      <div class="col-sm-10">
+                        <input type="text" name="chember_address" class="form-control" id="inputSkills" placeholder="Chember Address" value="{{ $user->chember_address }}">
+                      </div>
                     </div>
-                  </div>
+                  @endif
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Home Address</label>
 
@@ -179,6 +189,7 @@
                       <input type="text" name="address" class="form-control" placeholder="Home Address" value="{{ $user->address }}">
                     </div>
                   </div>
+                  @if($user->role == 'lawyer')
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Hire Rat</label>
 
@@ -186,6 +197,7 @@
                       <input type="text" name="rat" class="form-control" id="inputSkills" placeholder="Hire Rat" value="{{ $user->rat }}">
                     </div>
                   </div>
+                  @endif
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Profile Photo</label>
 
