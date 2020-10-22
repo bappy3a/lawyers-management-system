@@ -28,6 +28,9 @@ Route::group(['prefix' =>'lawyer','middleware'=>['auth','lawyer']], function(){
 	Route::get('/post', 'LawyerController@post')->name('lawyer.post');
 	Route::get('/post/{id}', 'LawyerController@post_show')->name('lawyer.post.show');
 	Route::post('/post/bit', 'LawyerController@bit')->name('lawyer.bit');
+	Route::get('/hire', 'HareController@lawyer_hire')->name('lawyer.hire');
+	Route::get('/hire/{id}', 'HareController@lawyer_hire_view')->name('lawyer.hire.view');
+
 });
 
 // Client Route
@@ -50,4 +53,5 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::any('verification/pay','VerificationController@verification_pay')->name('verification_pay');
 	Route::resource('helppost','HelpPostController');
 	Route::post('help/post/comment','HelpPostController@comment')->name('help.post.comment');
+	Route::post('hire/details/store', 'HareController@hire_details_store')->name('lawyer.hire.details.store');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Hare;
+use App\HireDetails;
 use App\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -17,8 +18,20 @@ class HareController extends Controller
      */
     public function index()
     {
-        $hires = Hare::where('client_id',Auth::user()->id)->get();
+        $hires = Hare::where('client_id',Auth::user()->id)->latest()->get();
         return view('client.hire.index',compact('hires'));
+    }
+
+    public function lawyer_hire()
+    {
+        $hires = Hare::where('lowyer_id',Auth::user()->id)->latest()->get();
+        return view('lawyer.hire.index',compact('hires'));
+    }
+
+    public function lawyer_hire_view($id)
+    {
+        $hire = Hare::find($id);
+        return view('lawyer.hire.show',compact('hire'));
     }
 
     /**
@@ -39,6 +52,8 @@ class HareController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::find($request->value_c);
+        auth()->login($user, true);
         $hire = New Hare;
         $hire->client_id = $request->value_c;
         $hire->lowyer_id = $request->value_a;
@@ -155,8 +170,27 @@ class HareController extends Controller
     }
 
 
+    public function hire_details_store(Request $request)
+    {
+        $details = New HireDetails;
+        $details->hire_id = $request->hire_id;
+        $details->user_id = auth()->user()->id;
+        $details->message = $request->message;
 
+        $documents = array();
+        if($request->hasFile('documents')){
+            foreach ($request->documents as $document) {
+                $path = $document->store('case/details');
+                array_push($documents, $path);
+            }
+            $details->documents = json_encode($documents);
+        }
+        $details->save();
 
+        Toastr::success('Case Report Successfully Save','Success');
+        return back();
+
+    }
 
 
 

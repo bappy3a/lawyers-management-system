@@ -22,7 +22,7 @@
   </div>
   <!-- /.box-body -->
 
-@if(!App\PostBit::where('user_id',Auth::user()->id)->first())
+@if(!App\PostBit::where('user_id',Auth::user()->id)->where('post_id',$post->id)->first())
   <div class="box-footer">
     <form action="{{ route('lawyer.bit') }}" method="post">
       @csrf

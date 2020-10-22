@@ -9,7 +9,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/user4-128x128.jpg') }}">
+              <img class="profile-user-img img-responsive img-circle" src="{{ asset($lawyer->image) }}">
 
               <h3 class="profile-username text-center">
                 {{ $lawyer->name }}

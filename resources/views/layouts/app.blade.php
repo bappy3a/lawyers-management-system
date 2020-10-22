@@ -204,9 +204,8 @@
         $('#messageBody').html(data);
     });
   }
-
-
 </script>
+
 {!! Toastr::message() !!}
 </body>
 </html>

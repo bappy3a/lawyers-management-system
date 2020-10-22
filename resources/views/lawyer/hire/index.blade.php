@@ -20,7 +20,7 @@
             <thead>
             <tr>
               <th width="3%">SI</th>
-              <th>Lawyer Name</th>
+              <th>Client Name</th>
               <th>Type Of Case</th>
               <th>Case No</th>
               <th>Case Date</th>
@@ -36,7 +36,7 @@
                   <td>{{ $hire->case->case_title }}</td>
                   <td>{{ $hire->case->case_date }}</td>
                   <td>
-                    <a href="{{ route('case.show',$hire->id) }}" class="btn btn-sm btn-primary">View Details</a>
+                    <a href="{{ route('lawyer.hire.view',$hire->id) }}" class="btn btn-sm btn-primary">View Details</a>
                   </td>
                 </tr>
               @endforeach
