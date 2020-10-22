@@ -30,6 +30,7 @@ Route::group(['prefix' =>'lawyer','middleware'=>['auth','lawyer']], function(){
 	Route::post('/post/bit', 'LawyerController@bit')->name('lawyer.bit');
 	Route::get('/hire', 'HareController@lawyer_hire')->name('lawyer.hire');
 	Route::get('/hire/{id}', 'HareController@lawyer_hire_view')->name('lawyer.hire.view');
+	Route::resource('milestone','MilestoneController');
 
 });
 
