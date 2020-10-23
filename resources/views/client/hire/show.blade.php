@@ -60,32 +60,6 @@
       </div>
     </div>
     <div class="col-lg-5">
-      <div class="box box-info">
-        <form action="{{ route('milestone.store') }}" method="post">
-          @csrf
-          <input type="hidden" name="hire_id" value="{{ $hire->id }}">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th width="90%">Date</th>
-                <th width="10%"><button type="button" onclick="addrow()" class="btn btn-primary btn-xs"> Add New Row</button></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input required class="form-control" type="date" name="date[]" ></td>
-                <td style="text-align: center;"><a href="javascript:void(0);" id="remove" class="btn btn-danger btn-sm remove"> <i class="fa fa-times"></i> </a> </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td style="border:none;"></td>               
-                <td> <button type="submit" class="btn btn-block btn-success btn-sm">Submit</button></td>
-              </tr>
-            </tfoot>
-          </table>
-        </form>
-      </div>
       <div class="box box-primary">
         <div class="box-header">
           <i class="ion ion-clipboard"></i>
@@ -100,12 +74,18 @@
                   <i class="fa fa-ellipsis-v"></i>
                   <i class="fa fa-ellipsis-v"></i>
                 </span>
-                <span class="text">{{ $milestone->date }}</span>
+                <span class="text">{{ $milestone->date }} Pay an amount <span class="text-red">{{ $milestone->pay }}</span> Tk </span>
                 @if($milestone->status == "Unpaid")
-                  <small class="label label-danger"><i class="fa fa-money"></i> Dou</small>
+                  <small class="label label-danger"><i class="fa fa-money"></i> Dou</small>  
+                  <form action="{{ route('milestone.pay') }}" method="post" class="pull-right" style="margin-top: -4px;">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $milestone->id }}">
+                    <button class="btn btn-success btn-sm">Pay Now</button>
+                  </form>
                 @else
                   <small class="label label-success"><i class="fa fa-money"></i> Paid</small>
                 @endif
+                
               </li>
             @endforeach
           </ul>
@@ -119,25 +99,6 @@
 
   <script>
 
-    function addrow(){
-      var tr = '<tr>'+
-          '<td><input required class="form-control" type="date" name="date[]" ></td>'+
-          '<td style="text-align: center;"><a href="javascript:void(0);" id="remove" class="btn btn-danger btn-sm remove"> <i class="fa fa-times"></i> </a> </td>'+                 
-       '</tr>';
-        $('tbody').append(tr);
-    };
-
-    $('body').delegate('#remove','click', function(){
-      var l= $('tbody tr').length;
-      console.log(l);
-      if (l == 1) {
-        alert('you can not remove Last Row');
-      }else{
-        $(this).parent().parent().remove();
-        total();
-      }
-      
-    });
 
   </script>
 

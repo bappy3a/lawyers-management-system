@@ -36,7 +36,7 @@
                   <td>{{ $hire->case->case_title }}</td>
                   <td>{{ $hire->case->case_date }}</td>
                   <td>
-                    <a href="{{ route('case.show',$hire->id) }}" class="btn btn-sm btn-primary">View Details</a>
+                    <a href="{{ route('hire.show',$hire->id) }}" class="btn btn-sm btn-primary">View Details</a>
                   </td>
                 </tr>
               @endforeach

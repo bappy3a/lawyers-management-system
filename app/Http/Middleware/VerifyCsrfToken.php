@@ -16,5 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/paymnet/pricing',
         '/verification/pay/success',
         '/verification/pay/fail',
+        '/milestone/pay/fail',
+        '/milestone/pay/success',
     ];
 }

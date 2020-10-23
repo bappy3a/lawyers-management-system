@@ -70,9 +70,10 @@ class HareController extends Controller
      * @param  \App\Hare  $hare
      * @return \Illuminate\Http\Response
      */
-    public function show(Hare $hare)
+    public function show($id)
     {
-        //
+        $hire = Hare::find($id);
+        return view('client.hire.show',compact('hire'));
     }
 
     /**

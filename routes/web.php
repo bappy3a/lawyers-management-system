@@ -12,6 +12,10 @@ Route::post('/lawer/register', 'HomeController@lawer_register_save')->name('lawe
 Route::resource('hire','HareController');
 Route::any('verification/pay/success','VerificationController@success_pay')->name('verification.pay.success');
 Route::any('verification/pay/fail','VerificationController@fail_pay')->name('verification.pay.fail');
+//milestone
+Route::any('milestone/pay','MilestoneController@pay')->name('milestone.pay');
+Route::any('milestone/pay/fail','MilestoneController@fail')->name('milestone.pay.fail');
+Route::any('milestone/pay/success','MilestoneController@success')->name('milestone.pay.success');
 
 Auth::routes();
 

@@ -11,7 +11,7 @@
 	<a href="{{ route('case.index') }}"><i class="fa fa-briefcase"></i>Case</a>
 </li>
 <li class="{{ Request::is('hire*') ? 'active' : '' }}">
-	<a href="{{ route('hire.index') }}"><i class="fa fa-user-circle"></i>Hire Lowyer</a>
+	<a href="{{ route('hire.index') }}"><i class="fa fa-user-circle"></i>Hire Lowyer & Case Details</a>
 </li>
 <li class="{{ Request::is('helppost*') ? 'active' : '' }}">
 	<a href="{{ route('helppost.index') }}"><i class="fa fa-briefcase"></i>Help Post</a>
