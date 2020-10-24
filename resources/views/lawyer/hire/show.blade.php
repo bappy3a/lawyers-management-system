@@ -64,6 +64,7 @@
         <form action="{{ route('milestone.store') }}" method="post">
           @csrf
           <input type="hidden" name="hire_id" value="{{ $hire->id }}">
+          <input type="hidden" name="lawyer_id" value="{{ $hire->lowyer_id }}">
           <table class="table table-striped">
             <thead>
               <tr>

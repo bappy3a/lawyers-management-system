@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hare;
 use App\HireDetails;
+use App\Milestone;
 use App\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -60,6 +61,17 @@ class HareController extends Controller
         $hire->case_id = $request->value_b;
         $hire->hire_date = $request->tran_date;
         $hire->save();
+
+        $lawyer = User::find($request->value_a);
+        $milestone = New Milestone;
+        $milestone->hire_id = $hire->id;
+        $milestone->lawyer_id = $request->value_a;
+        $milestone->pay = $lawyer ->rat;
+        $milestone->date = $hire->hire_date;
+        $milestone->status = 'Paid';
+        $milestone->save(); 
+
+
         Toastr::success('lowyer Hire & Payment Successfully Complete','Success');
         return back();
     }

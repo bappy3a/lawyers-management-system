@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bower_components/fullcalendar/dist/fullcalendar.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('bower_components/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
+  
   <style>
     i.fa.fa-star.active {
         color: #ffbc00;
@@ -191,6 +194,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <script src="{{ asset('dist/js/toastr.min.js') }}"></script>
+<!-- fullCalendar -->
+<script src="{{ asset('bower_components/moment/moment.js') }}"></script>
+<script src="{{ asset('bower_components/fullcalendar/dist/fullcalendar.min.js') }}"></script>
 @yield('js')
 <script>
   $(function () {

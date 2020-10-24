@@ -31,13 +31,16 @@
       	            @endif
     	            @if($user->role == 'lawyer')
     	                <li class="list-group-item">
-    	                  <b>Hire Rate</b> <a class="pull-right">BDT {{ $user->rat }}</a>
+    	                  <b>Hire Rate</b> <a class="pull-right">{{ $user->rat }} Tk</a>
     	                </li>
     	            @endif
     	            @if($user->role == 'lawyer')
     	                <li class="list-group-item">
     	                  <b>Reating</b> <a class="pull-right">{{ renderStarRating($user->review) }}</a>
     	                </li>
+                      <li class="list-group-item">
+                        <b>Your Balance</b> <a class="pull-right">{{ $user->balance }} Tk</a>
+                      </li>
     	            @endif
               </ul>
               @if($user->role == 'lawyer')

@@ -42,6 +42,7 @@ class MilestoneController extends Controller
         foreach ($request->date as  $date) {
             $milestone = New Milestone;
             $milestone->hire_id = $request->hire_id;
+            $milestone->lawyer_id = $request->lawyer_id;
             $milestone->pay = auth()->user()->rat;
             $milestone->date = $date;
             $milestone->status = 'Unpaid';

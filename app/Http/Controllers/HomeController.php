@@ -70,6 +70,14 @@ class HomeController extends Controller
 
     public function lawyer_dashboard()
     {
+        // $milestones =  array();
+
+        // foreach ($request->photos as $key => $photo) {
+        //     $path = $photo->store('uploads/products/photos');
+        //     array_push($milestones, $path);
+        // }
+        // $product->photos = json_encode($photos);
+
         return view('lawyer.dashboard');
     }
 

@@ -16,6 +16,7 @@ class CreateMilestonesTable extends Migration
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
             $table->integer('hire_id');
+            $table->integer('lawyer_id');
             $table->double('pay')->default(0,00);
             $table->date('date');
             $table->string('status')->nullable('Unpaid');
