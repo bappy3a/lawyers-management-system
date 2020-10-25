@@ -1,5 +1,47 @@
 @extends('layouts.app')
 
+@section('css')
+
+<style>
+  .rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+  }
+  .rate:not(:checked) > input {
+      position:absolute;
+      top:-9999px;
+  }
+  .rate:not(:checked) > label {
+      float:right;
+      width:1em;
+      overflow:hidden;
+      white-space:nowrap;
+      cursor:pointer;
+      font-size:30px;
+      color:#ccc;
+  }
+  .rate:not(:checked) > label:before {
+      content: '★ ';
+  }
+  .rate > input:checked ~ label {
+      color: #ffc700;    
+  }
+  .rate:not(:checked) > label:hover,
+  .rate:not(:checked) > label:hover ~ label {
+      color: #deb217;  
+  }
+  .rate > input:checked + label:hover,
+  .rate > input:checked + label:hover ~ label,
+  .rate > input:checked ~ label:hover,
+  .rate > input:checked ~ label:hover ~ label,
+  .rate > label:hover ~ input:checked ~ label {
+      color: #c59b08;
+  }
+</style>
+
+@endsection
+
 @section('heading','Case Report')
 @section('content')
   <div class="row">
@@ -60,6 +102,78 @@
       </div>
     </div>
     <div class="col-lg-5">
+
+      
+<div class="box box-warning">
+  <div class="box-header with-border">
+    <h3 class="box-title">Your Case Is Complete Please Review</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    @if($hire->status = 'complete')
+      @php
+        $review = \App\Review::where('hire_id',$hire->id)->first();
+      @endphp
+      @if($review)
+        <form role="form">
+          <div class="form-group">
+            <label style="display: block;">Review Star</label>
+              <div class="rate">
+                  <input type="radio" id="star5" name="rating" value="5" @if($review->rating == 5) checked @endif />
+                  <label for="star5" title="text">5 stars</label>
+                  <input type="radio" id="star4" name="rating" value="4" @if($review->rating == 4) checked @endif />
+                  <label for="star4" title="text">4 stars</label>
+                  <input type="radio" id="star3" name="rating" value="3" @if($review->rating == 3) checked @endif />
+                  <label for="star3" title="text">3 stars</label>
+                  <input type="radio" id="star2" name="rating" value="2" @if($review->rating == 2) checked @endif />
+                  <label for="star2" title="text">2 stars</label>
+                  <input type="radio" id="star1" name="rating" value="1" @if($review->rating == 1) checked @endif />
+                  <label for="star1" title="text">1 star</label>
+              </div>
+          </div>
+
+          <!-- textarea -->
+          <div class="form-group">
+            <textarea required name="comment" class="form-control" rows="3" placeholder="Enter Comment..." required readonly >{{ $review->comment }}</textarea>
+          </div>
+        </form>
+      @else
+        <form role="form" action="{{ route('review.submit') }}" method="post">
+          @csrf
+          <input type="hidden" name="hire_id" value="{{ $hire->id }}">
+          <input type="hidden" name="lowyer_id" value="{{ $hire->lowyer_id }}">
+          <div class="form-group">
+            <label style="display: block;">Review Star</label>
+              <div class="rate">
+                  <input type="radio" id="star5" name="rating" value="5" />
+                  <label for="star5" title="text">5 stars</label>
+                  <input type="radio" id="star4" name="rating" value="4" />
+                  <label for="star4" title="text">4 stars</label>
+                  <input type="radio" id="star3" name="rating" value="3" />
+                  <label for="star3" title="text">3 stars</label>
+                  <input type="radio" id="star2" name="rating" value="2" />
+                  <label for="star2" title="text">2 stars</label>
+                  <input type="radio" id="star1" name="rating" value="1" checked />
+                  <label for="star1" title="text">1 star</label>
+              </div>
+          </div>
+
+          <!-- textarea -->
+          <div class="form-group">
+            <textarea name="comment" class="form-control" rows="3" placeholder="Enter Comment..." required></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Submit
+            </button>
+          </div>
+        </form>
+      @endif
+    @endif
+  </div>
+  <!-- /.box-body -->
+</div>
+      
+
       <div class="box box-primary">
         <div class="box-header">
           <i class="ion ion-clipboard"></i>

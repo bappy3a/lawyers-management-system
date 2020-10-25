@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hare;
 use App\HireDetails;
 use App\Milestone;
+use App\Review;
 use App\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -203,6 +204,38 @@ class HareController extends Controller
         Toastr::success('Case Report Successfully Save','Success');
         return back();
 
+    }
+
+
+    public function complete($id)
+    {
+        $hire = Hare::find($id);
+        $hire->status = 'complete';
+        $hire->save();
+        Toastr::success('Successfully case complate Save','Success');
+        return back();
+    }
+
+
+    public function review(Request $request)
+    {
+        $review = new Review;
+        $review->hire_id = $request->hire_id;
+        $review->lowyer_id = $request->lowyer_id;
+        $review->user_id = Auth::user()->id;
+        $review->rating = $request->rating;
+        $review->comment = $request->comment;
+
+        $lawyer = User::find($request->lowyer_id);
+
+        if($review->save()){
+            $lawyer->review = Review::where('lowyer_id', $lawyer->id)->sum('rating')/count(Review::where('lowyer_id', $lawyer->id)->get());
+            $lawyer->save();
+            Toastr::success('Review has been submitted successfully','Success');
+            return back();
+        }
+        Toastr::error('Something went wrong','erroe');
+        return back();
     }
 
 

@@ -112,6 +112,9 @@
           </ul>
         </div>
       </div>
+      @if($hire->status == 'runing')
+        <a href="{{ route('hare.complete',$hire->id) }}" class="btn btn-success btn-lg btn-block">Complete Case</a>
+      @endif
     </div>
   </div>
 @endsection

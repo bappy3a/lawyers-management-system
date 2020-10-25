@@ -137,4 +137,11 @@ class HomeController extends Controller
        Toastr::success('Profile Successfully Update','Success');
        return back();
     }
+
+    public function lawyer_reviews()
+    {
+        return view('lawyer.review');
+    }
+
+
 }

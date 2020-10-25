@@ -14,9 +14,13 @@
 	<a href="{{ route('lawyer.hire') }}"><i class="fa fa-briefcase"></i>
 		<span>Your Client Case</span>
 		<span class="pull-right-container">
-         	<span class="label label-primary pull-right">{{ App\Hare::where('lowyer_id',auth()->user()->id)->count() }}</span>
+         	<span class="label label-primary pull-right">{{ App\Hare::where('lowyer_id',auth()->user()->id)->where('status','runing')->count() }}</span>
         </span>
 	</a>
+</li>
+
+<li class="{{ Request::is('lawyer/reviews') ? 'active' : '' }}">
+	<a href="{{ route('lawyer.reviews') }}"><i class="fa fa-user-circle-o"></i>Customer Reviews</a>
 </li>
 <li class="{{ Request::is('profile*') ? 'active' : '' }}">
 	<a href="{{ route('profile') }}"><i class="fa fa-user-circle-o"></i>Your Account</a>

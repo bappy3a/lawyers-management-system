@@ -33,8 +33,10 @@ Route::group(['prefix' =>'lawyer','middleware'=>['auth','lawyer']], function(){
 	Route::get('/post/{id}', 'LawyerController@post_show')->name('lawyer.post.show');
 	Route::post('/post/bit', 'LawyerController@bit')->name('lawyer.bit');
 	Route::get('/hire', 'HareController@lawyer_hire')->name('lawyer.hire');
+	Route::get('/reviews', 'HomeController@lawyer_reviews')->name('lawyer.reviews');
 	Route::get('/hire/{id}', 'HareController@lawyer_hire_view')->name('lawyer.hire.view');
 	Route::resource('milestone','MilestoneController');
+	Route::get('hare/complete/{id}','HareController@complete')->name('hare.complete');
 
 });
 
@@ -45,6 +47,7 @@ Route::group(['prefix' =>'client','middleware'=>['auth']], function(){
 	Route::get('/find/lawyer/{id}', 'ClientController@lawyer_view')->name('client.lawyer.view');
 	Route::resource('post','PostController');
 	Route::resource('case','CasController');
+	Route::post('review/submit', 'HareController@review')->name('review.submit');
 });
 
 Route::group(['middleware'=>['auth']], function(){

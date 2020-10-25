@@ -30,7 +30,7 @@
                   <b>Reting</b> <a class="pull-right">{{ renderStarRating($lawyer->review) }}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Case</b> <a class="pull-right">12</a>
+                  <b>Case</b> <a class="pull-right">{{ \App\Hare::where('lowyer_id',$lawyer->id)->count() }}</a>
                 </li>
               </ul>
 
@@ -105,23 +105,21 @@
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
-                <div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a class="pull-right btn-box-tool">{{ renderStarRating(4) }}</a>
-                        </span>
-                    <span class="description">SHired publicly - 7:30 PM today</span>
+                @foreach(\App\Review::where('lowyer_id',$lawyer->id)->latest()->get() as $review )
+                  <div class="post">
+                    <div class="user-block">
+                      <img class="img-circle img-bordered-sm" src="{{ asset($review->user->image) }}" alt="user image">
+                          <span class="username">
+                            <a href="#">{{ $review->user->name }}</a>
+                            <a class="pull-right btn-box-tool">{{ renderStarRating($lawyer->review) }}</a>
+                          </span>
+                      <span class="description">SHired publicly - {{ $review->created_at->diffForHumans() }}</span>
+                    </div>
+                    <p>
+                      {{ $review->comment }}
+                    </p>
                   </div>
-                  <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
-                  </p>
-                </div>
+                @endforeach
               </div>
 
 
