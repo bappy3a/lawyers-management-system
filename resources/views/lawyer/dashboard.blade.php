@@ -3,77 +3,77 @@
 @section('heading','Dashboard')
 @section('content')
 
-      <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Total Runing Case</span>
-              <span class="info-box-number">{{ \App\Hare::where('lowyer_id',auth()->user()->id)->count() }}</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
+        <div class="info-box-content">
+          <span class="info-box-text">Total Runing Case</span>
+          <span class="info-box-number">{{ \App\Hare::where('lowyer_id',auth()->user()->id)->count() }}</span>
         </div>
-        <!-- /.col -->
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Total Client</span>
-              <span class="info-box-number">{{ \App\Hare::where('lowyer_id',auth()->user()->id)->groupBy('client_id')->count() }}</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Your Balance</span>
-              <span class="info-box-number">{{ auth()->user()->balance }} Tk</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
+        <!-- /.info-box-content -->
       </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
 
-<div class="row">
-  <div class="col-md-3">
-      <div class="box box-solid">
-        <div class="box-header with-border">
-          <h4 class="box-title">Your next case upcoming</h4>
+        <div class="info-box-content">
+          <span class="info-box-text">Total Client</span>
+          <span class="info-box-number">{{ \App\Hare::where('lowyer_id',auth()->user()->id)->groupBy('client_id')->count() }}</span>
         </div>
-        <div class="box-body">
-          <!-- the events -->
-          <div>
-            @foreach(\App\Milestone::where('lawyer_id',auth()->user()->id)->whereDate('date', '>=', date("Y-m-d") )->get()   as $milestone ) 
-              <div class="external-event bg-red">{{ $milestone->date }} for {{ \App\Cas::find($milestone->hare->case_id)->case_title }} </div>
-            @endforeach
-          </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Your Balance</span>
+          <span class="info-box-number">{{ auth()->user()->balance }} Tk</span>
         </div>
+        <!-- /.info-box-content -->
       </div>
-  </div>
-  <div class="col-md-9">
-    <div class="box box-primary">
-      <div class="box-body no-padding">
-        <!-- THE CALENDAR -->
-        <div id="calendar"></div>
-      </div>
-      <!-- /.box-body -->
+      <!-- /.info-box -->
     </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h4 class="box-title">Your next case upcoming</h4>
+          </div>
+          <div class="box-body">
+            <!-- the events -->
+            <div>
+              @foreach(\App\Milestone::where('lawyer_id',auth()->user()->id)->whereDate('date', '>=', date("Y-m-d") )->get()   as $milestone ) 
+                <div class="external-event bg-red">{{ $milestone->date }} for {{ \App\Cas::find($milestone->hare->case_id)->case_title }} </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+      <div class="box box-primary">
+        <div class="box-body no-padding">
+          <!-- THE CALENDAR -->
+          <div id="calendar"></div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('js')

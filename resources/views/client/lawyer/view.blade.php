@@ -120,6 +120,11 @@
                     </p>
                   </div>
                 @endforeach
+                @if(\App\Review::where('lowyer_id',$lawyer->id)->latest()->count() == 0)
+                  <div class="post">
+                    <h3>No review found this lawyer</h3>
+                  </div>
+                @endif
               </div>
 
 

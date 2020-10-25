@@ -19,9 +19,7 @@
                   <th>Image</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Chember Address</th>
-                  <th width="5%">Verified</th>
-                  <th width="10%">Acction</th>
+                  <th>Address</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,18 +29,7 @@
                       <td><img src="{{ asset($lawyer->image) }}" alt="" style="width: 60px;height: 60px;"></td>
                       <td>{{ $lawyer->name }}</td>
                       <td>{{ $lawyer->email }}</td>
-                      <td>{{ $lawyer->chember_address }}</td>
-                      <td>
-                        @if($lawyer->is_verified)
-                          <span class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></span>
-                        @else
-                          <span class="btn btn-sm btn-danger"><i class="fa fa-ban"></i></span>
-                        @endif
-                      </td>
-                      <td>
-                        <a href="{{ route('admin.lawyer.view',$lawyer->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
+                      <td>{{ $lawyer->address }}</td>
                     </tr>
                   @endforeach
                 

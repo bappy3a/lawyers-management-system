@@ -17,4 +17,10 @@ class AdminController extends Controller
     	$lawyer = User::find($id);
     	return view('admin.lawyer.view',compact('lawyer'));
     }
+
+    public function client()
+    {
+        $lawyers = User::where('role', 'client')->latest()->get();
+        return view('admin.lawyer.cleint',compact('lawyers'));
+    }
 }

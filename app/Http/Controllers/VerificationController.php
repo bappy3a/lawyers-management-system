@@ -17,7 +17,9 @@ class VerificationController extends Controller
      */
     public function index()
     {
-        //
+        $datas = Verification::latest()->get();
+        return view('admin.verification.index',compact('datas'));
+
     }
 
     /**
@@ -63,9 +65,10 @@ class VerificationController extends Controller
      * @param  \App\Verification  $verification
      * @return \Illuminate\Http\Response
      */
-    public function show(Verification $verification)
+    public function show($id)
     {
-        //
+        $data = Verification::find($id);
+        return view('admin.verification.view',compact('data'));
     }
 
     /**

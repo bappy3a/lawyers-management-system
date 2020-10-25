@@ -24,6 +24,7 @@ Route::group(['prefix' =>'admin','middleware'=>['auth','admin']], function(){
 	Route::get('/dashboard', 'HomeController@admin_dashboard')->name('admin.dashboard');
 	Route::get('/lawyer', 'AdminController@lawyer')->name('admin.lawyer');
 	Route::get('/lawyer/{id}', 'AdminController@lawyer_view')->name('admin.lawyer.view');
+	Route::get('/client', 'AdminController@client')->name('admin.client');
 });
 
 // Lawyer Route
@@ -62,4 +63,5 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::resource('helppost','HelpPostController');
 	Route::post('help/post/comment','HelpPostController@comment')->name('help.post.comment');
 	Route::post('hire/details/store', 'HareController@hire_details_store')->name('lawyer.hire.details.store');
+	Route::resource('support','SupportController');
 });

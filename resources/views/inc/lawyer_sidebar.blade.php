@@ -22,6 +22,9 @@
 <li class="{{ Request::is('lawyer/reviews') ? 'active' : '' }}">
 	<a href="{{ route('lawyer.reviews') }}"><i class="fa fa-user-circle-o"></i>Customer Reviews</a>
 </li>
+<li class="{{ Request::is('support*') ? 'active' : '' }}">
+	<a href="{{ route('support.show',auth()->user()->id) }}"><i class="fa fa-question-circle"></i>Support</a>
+</li>
 <li class="{{ Request::is('profile*') ? 'active' : '' }}">
 	<a href="{{ route('profile') }}"><i class="fa fa-user-circle-o"></i>Your Account</a>
 </li>
