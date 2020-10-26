@@ -88,6 +88,7 @@
               <p>{{ $lawyer->experience }}</p>
 
               <hr>
+              @if($lawyer->certificate_2)
               <strong><i class="fa fa-map-marker margin-r-5"></i>Certificate</strong>
                 <ul class="mailbox-attachments clearfix">
                   @foreach(json_decode($lawyer->certificate_2) as $key=>$certificate)
@@ -103,6 +104,7 @@
                     </li>
                   @endforeach
                 </ul>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>
