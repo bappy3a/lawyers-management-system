@@ -104,22 +104,23 @@
                 <p>{{ $user->experience }}</p>
 
                 <hr>
+                @if($user->certificate_2)
+                  <strong><i class="fa fa-map-marker margin-r-5"></i>Certificate</strong>
+                  <ul class="mailbox-attachments clearfix">
+                    @foreach(json_decode($user->certificate_2) as $key=>$certificate)
+                      <li style="width: 104px !important;">
+                        <span class="mailbox-attachment-icon has-img"><img src="{{ asset($certificate) }}" alt="Attachment"></span>
 
-                <strong><i class="fa fa-map-marker margin-r-5"></i>Certificate</strong>
-                <ul class="mailbox-attachments clearfix">
-                  @foreach(json_decode($user->certificate_2) as $key=>$certificate)
-                    <li style="width: 104px !important;">
-                      <span class="mailbox-attachment-icon has-img"><img src="{{ asset($certificate) }}" alt="Attachment"></span>
-
-                      <div class="mailbox-attachment-info">
-                        
-                            <span class="mailbox-attachment-size">
-                              <a download href="{{ asset($certificate) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                            </span>
-                      </div>
-                    </li>
-                  @endforeach
-                </ul>
+                        <div class="mailbox-attachment-info">
+                          
+                              <span class="mailbox-attachment-size">
+                                <a download href="{{ asset($certificate) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                              </span>
+                        </div>
+                      </li>
+                    @endforeach
+                  </ul>
+                @endif
               </div>
               <!-- /.box-body -->
             </div>
