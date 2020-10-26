@@ -105,7 +105,7 @@ class VerificationController extends Controller
 
         $data->status = 'Pending';
         $data->save();
-        return bakc();
+        return back();
     }
 
     /**
@@ -198,7 +198,7 @@ class VerificationController extends Controller
         $data = Verification::find($id);
         $data->status = $type;
         $data->save();
-        if ($data->status = 'Approved') {
+        if ($type == 'Approved') {
             $user = User::find($data->user_id);
             $user->is_verified = 1;
             $user->reg_no = $data->reg_no;
