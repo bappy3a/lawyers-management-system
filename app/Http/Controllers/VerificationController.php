@@ -89,9 +89,23 @@ class VerificationController extends Controller
      * @param  \App\Verification  $verification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Verification $verification)
+    public function update(Request $request,$id)
     {
-        //
+        $data = Verification::find($id);
+        $data->reg_no = $request->reg_no;
+        $data->certificate_2 = $request->certificate_2;
+        $photos = array();
+        if($request->hasFile('certificate_2')){
+            foreach ($request->certificate_2 as $key => $photo) {
+                $path = $photo->store('uploads/verification');
+                array_push($photos, $path);
+            }
+            $data->certificate_2 = json_encode($photos);
+        }
+
+        $data->status = 'Pending';
+        $data->save();
+        return bakc();
     }
 
     /**
@@ -179,5 +193,21 @@ class VerificationController extends Controller
        return redirect()->route('profile');
     }
 
+    public function action($id, $type = '')
+    {
+        $data = Verification::find($id);
+        $data->status = $type;
+        $data->save();
+        if ($data->status = 'Approved') {
+            $user = User::find($data->user_id);
+            $user->is_verified = 1;
+            $user->reg_no = $data->reg_no;
+            $user->certificate_2 = $data->certificate_2;
+            $user->save();
+        }
+        Toastr::success('Verification Successfully Update','Success');
+        return back();
+
+    }
 
 }

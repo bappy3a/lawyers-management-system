@@ -104,6 +104,22 @@
                 <p>{{ $user->experience }}</p>
 
                 <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Certificate</strong>
+                <ul class="mailbox-attachments clearfix">
+                  @foreach(json_decode($user->certificate_2) as $key=>$certificate)
+                    <li style="width: 104px !important;">
+                      <span class="mailbox-attachment-icon has-img"><img src="{{ asset($certificate) }}" alt="Attachment"></span>
+
+                      <div class="mailbox-attachment-info">
+                        
+                            <span class="mailbox-attachment-size">
+                              <a download href="{{ asset($certificate) }}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                            </span>
+                      </div>
+                    </li>
+                  @endforeach
+                </ul>
               </div>
               <!-- /.box-body -->
             </div>
@@ -149,7 +165,7 @@
                       <label for="inputExperience" class="col-sm-2 control-label">Lawyer education institution name</label>
 
                       <div class="col-sm-10">
-                        <input type="text" name="certificate" placeholder="Lawyer education institution name" class="form-control" value="{{ $user->certificate_2 }}">
+                        <input type="text" name="certificate" placeholder="Lawyer education institution name" class="form-control" value="{{ $user->certificate }}">
                       </div>
                     </div>
                   @endif
@@ -258,40 +274,73 @@
       @php
         $verification = App\Verification::where('user_id',$user->id)->first();
       @endphp
-      <form action="{{ route('verification.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+      @if($verification->status == 'Pending')
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Account Verified From</h4> <span class="text-red">Verification free 500 Bdt</span>
         </div>
         <div class="modal-body">
-          @if($verification)
             <h3>Your request is {{ $verification->status }} please wait for chack your certificate</h3>
-          @else
-            <div class="form-group">
-              <label>Bar council registration number</label>
-              <input type="text" name="reg_no" class="form-control" placeholder="Bar council registration number">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">Inpurt Your all certificate</label>
-                <input type="file" name="certificate_2[]" multiple>
-                <p class="help-block">Multiple upload.</p>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" required> Pay BDT 500 For Verified
-              </label>
-            </div>
-          @endif
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          @if(!$verification)
-            <button type="submit" class="btn btn-primary">Submit</button>
-          @endif
         </div>
-      </form>
+      @elseif($verification->status == 'Rejected')
+        <form action="{{ route('verification.update',$verification->id) }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Account Verified Re-Submit From</h4>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label>Bar council registration number</label>
+                <input type="text" name="reg_no" class="form-control" placeholder="Bar council registration number">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputFile">Inpurt Your all certificate</label>
+                  <input type="file" name="certificate_2[]" multiple>
+                  <p class="help-block">Multiple upload.</p>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Re Submit</button>
+          </div>
+        </form>
+      @else
+        <form action="{{ route('verification.store') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Account Verified From</h4> <span class="text-red">Verification free 500 Bdt</span>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label>Bar council registration number</label>
+                <input type="text" name="reg_no" class="form-control" placeholder="Bar council registration number">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputFile">Inpurt Your all certificate</label>
+                  <input type="file" name="certificate_2[]" multiple>
+                  <p class="help-block">Multiple upload.</p>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" required> Pay BDT 500 For Verified
+                </label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      @endif
     </div>
   </div>
 </div>

@@ -25,6 +25,7 @@ Route::group(['prefix' =>'admin','middleware'=>['auth','admin']], function(){
 	Route::get('/lawyer', 'AdminController@lawyer')->name('admin.lawyer');
 	Route::get('/lawyer/{id}', 'AdminController@lawyer_view')->name('admin.lawyer.view');
 	Route::get('/client', 'AdminController@client')->name('admin.client');
+	Route::any('/verification/action/{id}/{type?}','VerificationController@action')->name('verification.action');
 });
 
 // Lawyer Route

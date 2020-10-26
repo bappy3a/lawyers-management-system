@@ -9,12 +9,17 @@
     <div class="col-md-8">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Read Mail</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
-            <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
-          </div>
+          <h3 class="box-title">Verification Request</h3>
+          @if($data->status == 'Pending')
+            <div class="box-tools pull-right">
+              <a href="{{ route('verification.action', [$data->id, 'Approved']) }}" class="btn btn-success"><i class="fa fa-check"></i> Approved</a>
+              <a href="{{ route('verification.action', [$data->id, 'Rejected']) }}" class="btn btn-danger"><i class="fa fa-ban"></i> Rejected</a>
+            </div>
+          @else
+            <div class="box-tools pull-right">
+                <h3 class="box-title" style="color: red;margin-top: 4px;font-weight: bold;">Your {{ $data->status }} this request</h3>
+            </div>
+          @endif
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
