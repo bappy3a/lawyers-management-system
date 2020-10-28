@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CaseResult;
 use App\Hare;
 use App\HireDetails;
 use App\Milestone;
@@ -225,17 +226,26 @@ class HareController extends Controller
         $review->user_id = Auth::user()->id;
         $review->rating = $request->rating;
         $review->comment = $request->comment;
-
+        $review->save();
+        //Lawer Review
         $lawyer = User::find($request->lowyer_id);
-
-        if($review->save()){
-            $lawyer->review = Review::where('lowyer_id', $lawyer->id)->sum('rating')/count(Review::where('lowyer_id', $lawyer->id)->get());
+        $lawyer->review = Review::where('lowyer_id', $lawyer->id)->sum('rating')/count(Review::where('lowyer_id', $lawyer->id)->get());
             $lawyer->save();
-            Toastr::success('Review has been submitted successfully','Success');
-            return back();
+        //Case report
+        $hare = Hare::find($request->hire_id);
+        $resutl = New CaseResult;
+        $resutl->case_id = $hare->case_id;
+        $resutl->lawyer_id = $request->lowyer_id;
+        if ($request->winorlose == 'win') {
+            $resutl->win = 1;
+        }else{
+            $resutl->lose = 1;
         }
-        Toastr::error('Something went wrong','erroe');
-        return back();
+        $resutl->save();
+        
+
+        Toastr::success('Review has been submitted successfully','Success');
+            return back();
     }
 
 

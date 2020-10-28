@@ -131,11 +131,22 @@
                   <label for="star1" title="text">1 star</label>
               </div>
           </div>
-
           <!-- textarea -->
           <div class="form-group">
             <textarea required name="comment" class="form-control" rows="3" placeholder="Enter Comment..." required readonly >{{ $review->comment }}</textarea>
           </div>
+          <div class="form-group">
+            @php
+              $result = \App\CaseResult::where('case_id',\App\Hare::find($hire->id)->case_id)->first();
+            @endphp
+            <label>Case Result</label>
+            @if($result->win == 1)
+              <h3 style="color: green">Case Win</h3>
+            @else
+              <h3 style="color: red">Case Lose</h3>
+            @endif
+          </div>
+
         </form>
       @else
         <form role="form" action="{{ route('review.submit') }}" method="post">
@@ -161,6 +172,23 @@
           <!-- textarea -->
           <div class="form-group">
             <textarea name="comment" class="form-control" rows="3" placeholder="Enter Comment..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Case Result</label>
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-check">
+                    <input name="winorlose" type="radio" class="form-check-input" id="win" required value="win">
+                    <label class="form-check-label" for="win">Win Case</label>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-check">
+                    <input name="winorlose" type="radio" class="form-check-input" id="lose" required value="lose">
+                    <label class="form-check-label" for="lose">Lose Case</label>
+                  </div>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <button type="submit" class="pull-right btn btn-primary" id="sendEmail">Submit
