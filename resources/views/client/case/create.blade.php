@@ -16,25 +16,31 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Type of Case</label>
               <div class="col-sm-9">
-                <input type="text" name="case_title" class="form-control" placeholder="Type of Case ...">
+                <input type="text" name="case_title" class="form-control" placeholder="Type of Case ..." >
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">Case Date</label>
               <div class="col-sm-9">
-                <input type="text" name="case_date" class="form-control pull-right" id="datepicker">
+                <input type="text" name="case_date" class="form-control pull-right" id="datepicker" >
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">Case Number</label>
               <div class="col-sm-9">
-                <input type="text" name="case_no" class="form-control" placeholder="Case Number ...">
+                <input type="text" name="case_no" class="form-control" placeholder="Case Number ..." >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Court Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="court" class="form-control" placeholder="Case Number ..." >
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">Description</label>
               <div class="col-sm-9">
-                <textarea  id="edtor" name="case_description" rows="10" cols="80" placeholder="Enter your case Description .."></textarea>
+                <textarea  id="edtor" name="case_description" rows="10" cols="80" placeholder="Enter your case Description .." ></textarea>
               </div>
             </div>
             <div class="form-group">

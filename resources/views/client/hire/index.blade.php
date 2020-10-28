@@ -24,6 +24,7 @@
               <th>Type Of Case</th>
               <th>Case No</th>
               <th>Case Date</th>
+              <th>Court Nate</th>
               <th width="10%">Acction</th>
             </tr>
             </thead>
@@ -35,6 +36,7 @@
                   <td>{{ $hire->case->case_no }}</td>
                   <td>{{ $hire->case->case_title }}</td>
                   <td>{{ $hire->case->case_date }}</td>
+                  <td>{{ $hire->case->court }}</td>
                   <td>
                     <a href="{{ route('hire.show',$hire->id) }}" class="btn btn-sm btn-primary">View Details</a>
                   </td>

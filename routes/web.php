@@ -16,6 +16,8 @@ Route::any('verification/pay/fail','VerificationController@fail_pay')->name('ver
 Route::any('milestone/pay','MilestoneController@pay')->name('milestone.pay');
 Route::any('milestone/pay/fail','MilestoneController@fail')->name('milestone.pay.fail');
 Route::any('milestone/pay/success','MilestoneController@success')->name('milestone.pay.success');
+//
+Route::post('message/appointment/success','MessageController@appointment_success')->name('message.appointment.pay.success');
 
 Auth::routes();
 
@@ -65,4 +67,7 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::post('help/post/comment','HelpPostController@comment')->name('help.post.comment');
 	Route::post('hire/details/store', 'HareController@hire_details_store')->name('lawyer.hire.details.store');
 	Route::resource('support','SupportController');
+
+	Route::post('message/appointment','MessageController@appointment')->name('message.appointment');
+	Route::post('message/appointment/pay','MessageController@appointment_pay')->name('message.appointment.pay');
 });

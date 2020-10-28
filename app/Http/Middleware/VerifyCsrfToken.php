@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         '/verification/pay/fail',
         '/milestone/pay/fail',
         '/milestone/pay/success',
+        '/message/appointment/success',
     ];
 }

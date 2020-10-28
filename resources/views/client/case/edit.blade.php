@@ -33,6 +33,12 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-3 control-label">Court Name</label>
+              <div class="col-sm-9">
+                <input value="{{ $case->court }}" type="text" name="court" class="form-control" placeholder="Case Number ..." >
+              </div>
+            </div>
+            <div class="form-group">
               <label class="col-sm-3 control-label">Description</label>
               <div class="col-sm-9">
                 <textarea  id="editor1" name="case_description" rows="10" cols="80" placeholder="Enter your case Description ..">{{ $case->case_description }}</textarea>

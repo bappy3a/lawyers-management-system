@@ -21,6 +21,7 @@
             <tr>
               <th width="3%">SI</th>
               <th>Client Name</th>
+              <th>Court Name</th>
               <th>Type Of Case</th>
               <th>Case No</th>
               <th>Case Date</th>
@@ -32,6 +33,7 @@
                 <tr>
                   <td>{{ $key +1 }}</td>
                   <td><a href="{{ route('client.lawyer.view',$hire->lawyer->id) }}">{{ $hire->lawyer->name }}</a></td>
+                  <td>{{ $hire->case->court }}</td>
                   <td>{{ $hire->case->case_no }}</td>
                   <td>{{ $hire->case->case_title }}</td>
                   <td>{{ $hire->case->case_date }}</td>

@@ -43,12 +43,14 @@ class CasController extends Controller
             'case_no'           => 'required',
             'case_title'        => 'required',
             'case_date'         => 'required',
+            'court'             => 'required',
             'case_description'  => 'required',
         ]);
 
         $case = New Cas;
         $case->user_id = Auth::user()->id;
         $case->case_no = $request->case_no;
+        $case->court = $request->court;
         $case->case_title = $request->case_title;
         $case->case_date = Carbon::createFromFormat('m/d/Y', $request->case_date)->format('Y-m-d');
         $case->case_description = $request->case_description;

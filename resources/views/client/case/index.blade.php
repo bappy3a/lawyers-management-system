@@ -26,6 +26,7 @@
               <th>Case No</th>
               <th>Type Of Case</th>
               <th>Case Date</th>
+              <th>Courte Name</th>
               <th>Case Description</th>
               <th width="12%">Acction</th>
             </tr>
@@ -37,6 +38,7 @@
                   <td>{{ $case->case_no }}</td>
                   <td>{{ $case->case_title }}</td>
                   <td>{{ $case->case_date }}</td>
+                  <td>{{ $case->court }}</td>
                   <td>{!! $case->case_description !!}</td>
                   <td>
                     <a href="{{ route('case.edit',$case->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
