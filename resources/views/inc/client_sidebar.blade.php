@@ -10,6 +10,12 @@
 <li class="{{ Request::is('client/case*') ? 'active' : '' }}">
 	<a href="{{ route('case.index') }}"><i class="fa fa-briefcase"></i>Case</a>
 </li>
+<li class="{{ Request::is('active/case*') ? 'active' : '' }}">
+	<a href="{{ route('active.case') }}"><i class="fa fa-briefcase"></i>Active Case</a>
+</li>
+<li class="{{ Request::is('complete/case*') ? 'active' : '' }}">
+	<a href="{{ route('complete.case') }}"><i class="fa fa-briefcase"></i>Complete Case</a>
+</li>
 <li class="{{ Request::is('hire*') ? 'active' : '' }}">
 	<a href="{{ route('hire.index') }}"><i class="fa fa-user-circle"></i>Hire Lowyer & Case Details</a>
 </li>

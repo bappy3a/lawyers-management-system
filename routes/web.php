@@ -70,4 +70,7 @@ Route::group(['middleware'=>['auth']], function(){
 
 	Route::post('message/appointment','MessageController@appointment')->name('message.appointment');
 	Route::post('message/appointment/pay','MessageController@appointment_pay')->name('message.appointment.pay');
+	//
+	Route::get('active/case','CasController@active')->name('active.case');
+	Route::get('complete/case','CasController@complete')->name('complete.case');
 });

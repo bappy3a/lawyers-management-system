@@ -19,6 +19,12 @@
 	</a>
 </li>
 
+<li class="{{ Request::is('active/case*') ? 'active' : '' }}">
+	<a href="{{ route('active.case') }}"><i class="fa fa-briefcase"></i>Active Case</a>
+</li>
+<li class="{{ Request::is('complete/case*') ? 'active' : '' }}">
+	<a href="{{ route('complete.case') }}"><i class="fa fa-briefcase"></i>Complete Case</a>
+</li>
 <li class="{{ Request::is('lawyer/reviews') ? 'active' : '' }}">
 	<a href="{{ route('lawyer.reviews') }}"><i class="fa fa-user-circle-o"></i>Customer Reviews</a>
 </li>

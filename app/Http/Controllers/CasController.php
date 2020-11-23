@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cas;
+use App\Hare;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -121,6 +122,28 @@ class CasController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        //dd($id);
+    }
+
+    public function active()
+    {
+        $role = Auth::user()->role;
+        if($role == 'client'){
+            $hares = Hare::where('client_id',auth()->user()->id)->where('status','runing')->get();
+        }else{
+            $hares = Hare::where('lowyer_id',auth()->user()->id)->where('status','runing')->get();
+        }
+        return view('case_report.active',compact('hares'));
+    }
+
+    public function complete()
+    {
+        $role = Auth::user()->role;
+        if($role == 'client'){
+            $hares = Hare::where('client_id',auth()->user()->id)->where('status','!=' ,'runing')->get();
+        }else{
+            $hares = Hare::where('lowyer_id',auth()->user()->id)->where('status','!=' ,'runing')->get();
+        }
+        return view('case_report.complete',compact('hares'));
     }
 }
