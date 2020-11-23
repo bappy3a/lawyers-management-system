@@ -28,6 +28,10 @@ Route::group(['prefix' =>'admin','middleware'=>['auth','admin']], function(){
 	Route::get('/lawyer/{id}', 'AdminController@lawyer_view')->name('admin.lawyer.view');
 	Route::get('/client', 'AdminController@client')->name('admin.client');
 	Route::any('/verification/action/{id}/{type?}','VerificationController@action')->name('verification.action');
+	//
+	Route::get('/report/lawyer', 'ReportController@lawyer')->name('report.lawyer');
+	Route::get('/report/financial', 'ReportController@financial')->name('report.financial');
+	Route::get('/report/case', 'ReportController@case')->name('report.case');
 });
 
 // Lawyer Route
