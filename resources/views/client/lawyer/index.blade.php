@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('plugins/seiyria-bootstrap-slider/css/bootstrap-slider.min.css') }}">
+@endsection
+
 @section('heading','Fine Your Lawyer')
 @section('content')
 
@@ -42,7 +46,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-xs-3">
+              <div class="col-xs-2">
                 <div class="form-group">
                   <label>Reting</label>
                   <select class="form-control" name="review">
@@ -59,7 +63,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-xs-3">
+              <div class="col-xs-2">
                 <div class="form-group">
                   <label>Verified</label>
                   <select class="form-control" name="is_verified">
@@ -69,6 +73,19 @@
                 </div>
               </div>
               <div class="col-xs-3">
+                <div class="form-group">
+                  <label>Price</label> <br>
+                  <input type="text" name="price" value="" class="slider form-control" data-slider-min="0" data-slider-max="2000" data-slider-step="5" 
+                  @if(request()->query('price'))
+                  data-slider-value="[{{ request()->query('price') }}]" 
+                  @else
+                  data-slider-value="[10,1000]" 
+                  @endif
+                  data-slider-orientation="horizontal"
+                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+                </div>
+              </div>
+              <div class="col-xs-2">
                 <label style="margin-bottom: 20px;"> </label>
                 <button type="submit" class="btn btn-block btn-success"> Search</button>
               </div>
@@ -92,6 +109,7 @@
                   <th>Lawyer Type</th>
                   <th>Chember Address</th>
                   <th>Review</th>
+                  <th>Price</th>
                   <th width="5%">Verified</th>
                   <th width="10%">Acction</th>
                 </tr>
@@ -108,6 +126,7 @@
                       <td>{{ $lawyer->lawyer_type }}</td>
                       <td>{{ $lawyer->chember_address }}</td>
                       <td>{{ renderStarRating($lawyer->review) }}</td>
+                      <td>${{ $lawyer->rat }}</td>
                       <td>
                         @if($lawyer->is_verified)
                           <span class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></span>
@@ -138,6 +157,14 @@
   <script>
     $(function () {
       $('#example1').DataTable()
+    })
+  </script>
+  <!-- Bootstrap slider -->
+  <script src="{{ asset('plugins/seiyria-bootstrap-slider/bootstrap-slider.min.js') }}"></script>
+  <script>
+    $(function () {
+      /* BOOTSTRAP SLIDER */
+      $('.slider').slider()
     })
   </script>
 
