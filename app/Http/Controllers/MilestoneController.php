@@ -39,11 +39,11 @@ class MilestoneController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->date as  $date) {
+        foreach ($request->date as $key=>$date) {
             $milestone = New Milestone;
             $milestone->hire_id = $request->hire_id;
             $milestone->lawyer_id = $request->lawyer_id;
-            $milestone->pay = auth()->user()->rat;
+            $milestone->pay = $request->price[$key];
             $milestone->date = $date;
             $milestone->status = 'Unpaid';
             $milestone->save(); 

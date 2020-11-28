@@ -68,18 +68,21 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th width="90%">Date</th>
+                <th width="40%">Date</th>
+                <th width="30%">Date of appearance fee</th>
                 <th width="10%"><button type="button" onclick="addrow()" class="btn btn-primary btn-xs"> Add New Row</button></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><input required class="form-control" type="date" name="date[]" ></td>
+                <td><input required class="form-control" type="number" name="price[]" placeholder="Date of appearance fee"></td>
                 <td style="text-align: center;"><a href="javascript:void(0);" id="remove" class="btn btn-danger btn-sm remove"> <i class="fa fa-times"></i> </a> </td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
+                <td style="border:none;"></td>               
                 <td style="border:none;"></td>               
                 <td> <button type="submit" class="btn btn-block btn-success btn-sm">Submit</button></td>
               </tr>
@@ -101,7 +104,8 @@
                   <i class="fa fa-ellipsis-v"></i>
                   <i class="fa fa-ellipsis-v"></i>
                 </span>
-                <span class="text">{{ $milestone->date }}</span>
+                <span class="text">{{ $milestone->date }},</span>
+                <span class="text">Pay Tk{{ $milestone->pay }}</span>
                 @if($milestone->status == "Unpaid")
                   <small class="label label-danger"><i class="fa fa-money"></i> Dou</small>
                 @else
@@ -126,6 +130,7 @@
     function addrow(){
       var tr = '<tr>'+
           '<td><input required class="form-control" type="date" name="date[]" ></td>'+
+          ' <td><input required class="form-control" type="number" name="price[]" placeholder="Date of appearance fee"></td>'+
           '<td style="text-align: center;"><a href="javascript:void(0);" id="remove" class="btn btn-danger btn-sm remove"> <i class="fa fa-times"></i> </a> </td>'+                 
        '</tr>';
         $('tbody').append(tr);
