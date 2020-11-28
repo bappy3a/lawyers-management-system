@@ -75,7 +75,7 @@
               <div class="col-xs-3">
                 <div class="form-group">
                   <label>Price</label> <br>
-                  <input type="text" name="price" value="" class="slider form-control" data-slider-min="0" data-slider-max="2000" data-slider-step="5" 
+                  <input type="text" name="price" value="" class="slider form-control" data-slider-min="0" data-slider-max="20000" data-slider-step="5" 
                   @if(request()->query('price'))
                   data-slider-value="[{{ request()->query('price') }}]" 
                   @else

@@ -6,7 +6,7 @@
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ url('/') }}"><b>{{ config('app.name', 'Laravel') }}</b></a>
+    <a style="font-size: 16px" href="{{ url('/') }}"><b>{{ config('app.name', 'Laravel') }}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
