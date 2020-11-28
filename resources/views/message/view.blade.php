@@ -80,7 +80,7 @@
               @endif
               <input type="hidden" name="message_id" value="{{ $messages->first()->message_id }}">
               <div class="input-group">
-                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control" required>
                 @error('message')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
