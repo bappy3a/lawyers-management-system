@@ -55,7 +55,7 @@
                         <br> Date {{ $message->appointment_date }}<br>
                         <form action="{{ route('message.appointment.pay') }}" method="post">
                           @csrf
-                          <input type="hidden" name="message_id" value="{{ $message->id }}">
+                          <input type="hidden" name="message_id" value="{{ $message->id }}" required>
                           <button type="submit" class="btn btn-danger btn-sm"> Pay now</button>
                         </form>
                       </div>
