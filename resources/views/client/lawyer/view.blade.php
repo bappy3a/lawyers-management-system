@@ -146,7 +146,9 @@
 
 
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="{{ route('message.store') }}" method="post">
+                  @csrf
+                  <input type="hidden" name="to" value="{{ $lawyer->id }}">
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
@@ -158,7 +160,12 @@
                     <label for="inputExperience" class="col-sm-2 control-label">Message</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Type sumthing ......."></textarea>
+                      <textarea name="message" class="form-control" id="inputExperience" placeholder="Type sumthing ......."></textarea>
+                      @error('message')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
                     </div>
                   </div>
 

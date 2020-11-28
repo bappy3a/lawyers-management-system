@@ -11,7 +11,7 @@
         <input class="form-control" placeholder="To:" value="To: {{ $bit->user->name }}" readonly>
       </div>
       <div class="form-group">
-          <textarea name="message" class="form-control @error('name') is-invalid @enderror" style="height: 250px" placeholder="Type your message" required></textarea>
+          <textarea name="message" class="form-control @error('message') is-invalid @enderror" style="height: 250px" placeholder="Type your message" required></textarea>
           @error('message')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
