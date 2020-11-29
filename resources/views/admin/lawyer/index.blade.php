@@ -41,7 +41,6 @@
                       </td>
                       <td>
                         <a href="{{ route('admin.lawyer.view',$lawyer->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                       </td>
                     </tr>
                   @endforeach

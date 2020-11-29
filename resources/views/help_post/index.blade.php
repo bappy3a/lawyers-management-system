@@ -38,7 +38,7 @@
                   <td>{!! $post->description !!}</td>
                   <td>
                     <a href="{{ route('helppost.show',$post->id) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="View Post"><i class="fa fa-eye"></i></a>
-                    @if(auth()->user()->id == $post->user->id)
+                    @if(auth()->user()->id == $post->user->id or  auth()->user()->role == 'admin')
                       <a href="{{ route('helppost.edit',$post->id) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Edite Post"><i class="fa fa-edit"></i></a>
                       <button onclick="deletecat({{ $post->id }})" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Post"><i class="fa fa-trash"></i></button>
                       <form  id="delete-form-{{ $post->id }}" action="{{ route('helppost.destroy',$post->id) }}" method="post" style="display: none;">

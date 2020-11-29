@@ -103,9 +103,11 @@ class HelpPostController extends Controller
      * @param  \App\HelpPost  $helpPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HelpPost $helpPost)
+    public function destroy($id)
     {
-        //
+        $post = HelpPost::find($id)->delete();
+        Toastr::success('Post Successfully delete','Success');
+        return back();
     }
 
     public function comment(Request $request)

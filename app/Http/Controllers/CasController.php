@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cas;
 use App\Hare;
+use App\HireDetails;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class CasController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'case_no'           => 'required',
+            'case_no'           => 'required|unique:cas',
             'case_title'        => 'required',
             'case_date'         => 'required',
             'court'             => 'required',
@@ -122,7 +123,21 @@ class CasController extends Controller
      */
     public function destroy($id)
     {
-        //dd($id);
+        $case = Cas::find($id);
+        $hare = Hare::where('case_id',$id)->first();
+        if ($hare) {
+            $hare_details = HireDetails::where('hire_id',$hare->id)->get();
+            if ($hare_details) {
+                foreach ($hare_details as $value) {
+                    $value->delete();
+                }
+            }
+            $hare->delete();
+        }
+        
+        $case->delete();
+        Toastr::success('Cose Successfully delete','Success');
+        return back();
     }
 
     public function active()
