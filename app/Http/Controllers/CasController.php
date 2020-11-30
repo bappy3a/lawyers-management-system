@@ -19,7 +19,7 @@ class CasController extends Controller
      */
     public function index()
     {
-        $cases = Cas::latest()->get();
+        $cases = Cas::latest()->where('user_id',auth()->user()->id)->get();
         return view('client.case.index',compact('cases'));
     }
 
