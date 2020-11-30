@@ -32,7 +32,7 @@
               @foreach($hires as $key=>$hire)
                 <tr>
                   <td>{{ $key +1 }}</td>
-                  <td><a href="{{ route('client.lawyer.view',$hire->lawyer->id) }}">{{ $hire->lawyer->name }}</a></td>
+                  <td><a href="#">{{ $hire->cleint->name }}</a></td>
                   <td>{{ $hire->case->court }}</td>
                   <td>{{ $hire->case->case_no }}</td>
                   <td>{{ $hire->case->case_title }}</td>

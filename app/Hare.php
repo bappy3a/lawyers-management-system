@@ -13,4 +13,8 @@ class Hare extends Model
     public function lawyer(){
         return $this->belongsTo(User::class,'lowyer_id');
     }
+
+    public function cleint(){
+        return $this->belongsTo(User::class,'client_id');
+    }
 }
