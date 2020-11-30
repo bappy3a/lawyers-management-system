@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cas;
 use App\Hare;
+use App\Milestone;
 use App\HireDetails;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -132,6 +133,11 @@ class CasController extends Controller
                     $value->delete();
                 }
             }
+
+            foreach (Milestone::where('hire_id',$hare->id)->get() as $milestone) {
+                $milestone->delete();
+            }
+
             $hare->delete();
         }
         
